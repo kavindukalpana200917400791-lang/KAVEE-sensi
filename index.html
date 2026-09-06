@@ -1,1 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KAVEE SENSI STORE | Free Fire Sensi Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #ff4757;
+            --secondary: #2ed573;
+            --accent: #ffa502;
+            --dark: #0a0a0f;
+            --darker: #050508;
+            --card: #13131f;
+            --card-hover: #1a1a2e;
+            --border: #2a2a3e;
+            --text: #e0e0e0;
+            --text-muted: #888;
+            --glow-primary: 0 0 20px rgba(255, 71, 87, 0.4);
+            --glow-secondary: 0 0 20px rgba(46, 213, 115, 0.4);
+        }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: var(--darker);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* Background */
+        .bg-animation {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+            background:
+                radial-gradient(ellipse at 20% 80%, rgba(255,71,87,0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(46,213,115,0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(255,165,2,0.03) 0%, transparent 70%);
+        }
+        .particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+        .particle { position: absolute; width: 2px; height: 2px; background: var(--primary); border-radius: 50%; animation: float 15s infinite; opacity: 0.3; }
+        @keyframes float { 0%,100%{transform:translateY(0) translateX(0);opacity:0} 10%{opacity:0.3} 90%{opacity:0.3} 100%{transform:translateY(-100vh) translateX(50px);opacity:0} }
+
+        /* Header */
+        header { background: rgba(10,10,15,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; }
+        nav { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .logo-icon { width: 45px; height: 45px; background: linear-gradient(135deg, var(--primary), var(--accent)); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: white; box-shadow: var(--glow-primary); animation: pulse 2s infinite; }
+        @keyframes pulse { 0%,100%{box-shadow:0 0 20px rgba(255,71,87,0.4)} 50%{box-shadow:0 0 40px rgba(255,71,87,0.7)} }
+        .logo-text { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; font-weight: 900; background: linear-gradient(135deg, #fff, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; letter-spacing: 2px; }
+        .logo-sub { font-size: 0.7rem; color: var(--text-muted); letter-spacing: 3px; text-transform: uppercase; }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a { color: var(--text-muted); text-decoration: none; font-weight: 600; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s; position: relative; }
+        .nav-links a:hover { color: var(--primary); }
+        .nav-links a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: var(--primary); transition: width 0.3s; }
+        .nav-links a:hover::after { width: 100%; }
+
+        /* Hero */
+        .hero { padding: 5rem 2rem; text-align: center; max-width: 1400px; margin: 0 auto; }
+        .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,71,87,0.1); border: 1px solid rgba(255,71,87,0.3); padding: 0.5rem 1.2rem; border-radius: 50px; font-size: 0.85rem; color: var(--primary); margin-bottom: 1.5rem; animation: glow 3s infinite; }
+        @keyframes glow { 0%,100%{box-shadow:0 0 5px rgba(255,71,87,0.2)} 50%{box-shadow:0 0 20px rgba(255,71,87,0.4)} }
+        .hero h1 { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; font-weight: 900; margin-bottom: 1rem; line-height: 1.2; }
+        .hero h1 span { background: linear-gradient(135deg, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .hero p { font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin: 0 auto 2rem; line-height: 1.6; }
+        .hero-stats { display: flex; justify-content: center; gap: 3rem; margin-top: 3rem; }
+        .stat { text-align: center; }
+        .stat-value { font-family: 'Orbitron', sans-serif; font-size: 2rem; font-weight: 700; color: var(--primary); }
+        .stat-label { font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; }
+
+        /* Social Links Bar */
+        .social-bar { max-width: 1400px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+        .social-btn { display: inline-flex; align-items: center; gap: 8px; padding: 0.8rem 1.5rem; border-radius: 12px; text-decoration: none; font-weight: 700; font-size: 0.95rem; transition: all 0.3s; border: 1px solid var(--border); color: var(--text); }
+        .social-btn.whatsapp { background: rgba(37,211,102,0.1); border-color: rgba(37,211,102,0.3); }
+        .social-btn.whatsapp:hover { background: rgba(37,211,102,0.2); box-shadow: 0 0 20px rgba(37,211,102,0.3); transform: translateY(-3px); }
+        .social-btn.youtube { background: rgba(255,0,0,0.1); border-color: rgba(255,0,0,0.3); }
+        .social-btn.youtube:hover { background: rgba(255,0,0,0.2); box-shadow: 0 0 20px rgba(255,0,0,0.3); transform: translateY(-3px); }
+        .social-btn i { font-size: 1.2rem; }
+
+        /* File Uploader */
+        .upload-section { max-width: 900px; margin: 3rem auto; padding: 0 2rem; }
+        .section-header { text-align: center; margin-bottom: 2rem; }
+        .section-header h2 { font-family: 'Orbitron', sans-serif; font-size: 2rem; margin-bottom: 0.5rem; }
+        .section-header p { color: var(--text-muted); }
+        .upload-zone { background: var(--card); border: 2px dashed var(--border); border-radius: 20px; padding: 3rem; text-align: center; transition: all 0.3s; cursor: pointer; position: relative; overflow: hidden; }
+        .upload-zone::before { content: ''; position: absolute; top: -2px; left: -2px; right: -2px; bottom: -2px; background: linear-gradient(45deg, var(--primary), var(--accent), var(--secondary), var(--primary)); border-radius: 20px; opacity: 0; z-index: -1; transition: opacity 0.3s; background-size: 400% 400%; animation: gradient 3s ease infinite; }
+        @keyframes gradient { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+        .upload-zone:hover { border-color: transparent; transform: translateY(-5px); }
+        .upload-zone:hover::before { opacity: 1; }
+        .upload-zone.dragover { border-color: var(--primary); background: rgba(255,71,87,0.05); }
+        .upload-icon { font-size: 4rem; color: var(--primary); margin-bottom: 1rem; animation: bounce 2s infinite; }
+        @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+        .upload-zone h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .upload-zone p { color: var(--text-muted); margin-bottom: 1.5rem; }
+        .upload-btn { background: linear-gradient(135deg, var(--primary), var(--accent)); color: white; border: none; padding: 0.9rem 2.5rem; border-radius: 50px; font-family: 'Rajdhani', sans-serif; font-size: 1rem; font-weight: 700; cursor: pointer; transition: all 0.3s; text-transform: uppercase; letter-spacing: 2px; box-shadow: var(--glow-primary); }
+        .upload-btn:hover { transform: scale(1.05); box-shadow: 0 0 40px rgba(255,71,87,0.6); }
+        #fileInput { display: none; }
+
+        /* File List */
+        .file-list { margin-top: 2rem; }
+        .file-item { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1rem 1.5rem; margin-bottom: 0.8rem; display: flex; align-items: center; justify-content: space-between; transition: all 0.3s; animation: slideIn 0.3s ease; }
+        @keyframes slideIn { from{opacity:0;transform:translateX(-20px)} to{opacity:1;transform:translateX(0)} }
+        .file-item:hover { background: var(--card-hover); border-color: var(--primary); transform: translateX(5px); }
+        .file-info { display: flex; align-items: center; gap: 1rem; }
+        .file-icon { width: 45px; height: 45px; background: rgba(255,71,87,0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--primary); font-size: 1.2rem; }
+        .file-details h4 { font-size: 1rem; margin-bottom: 2px; }
+        .file-details span { font-size: 0.8rem; color: var(--text-muted); }
+        .file-actions { display: flex; gap: 0.5rem; }
+        .file-btn { width: 35px; height: 35px; border-radius: 8px; border: 1px solid var(--border); background: transparent; color: var(--text-muted); cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; }
+        .file-btn:hover { background: var(--primary); color: white; border-color: var(--primary); }
+        .progress-bar { width: 100%; height: 4px; background: var(--border); border-radius: 2px; margin-top: 0.5rem; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, var(--primary), var(--accent)); border-radius: 2px; transition: width 0.3s; width: 0%; }
+
+        /* Panels Store */
+        .store-section { max-width: 1400px; margin: 5rem auto; padding: 0 2rem; }
+        .store-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+        .panel-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; transition: all 0.3s; position: relative; }
+        .panel-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--primary), var(--accent)); transform: scaleX(0); transition: transform 0.3s; }
+        .panel-card:hover::before { transform: scaleX(1); }
+        .panel-card:hover { transform: translateY(-10px); border-color: rgba(255,71,87,0.3); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+        .panel-header { padding: 1.5rem; background: linear-gradient(135deg, rgba(255,71,87,0.1), rgba(255,165,2,0.05)); border-bottom: 1px solid var(--border); }
+        .panel-tag { display: inline-block; padding: 0.3rem 0.8rem; background: rgba(46,213,115,0.15); color: var(--secondary); border-radius: 50px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem; }
+        .panel-tag.hot { background: rgba(255,71,87,0.15); color: var(--primary); }
+        .panel-header h3 { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; }
+        .panel-body { padding: 1.5rem; }
+        .panel-features { list-style: none; margin-bottom: 1.5rem; }
+        .panel-features li { padding: 0.4rem 0; color: var(--text-muted); font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem; }
+        .panel-features li i { color: var(--secondary); font-size: 0.8rem; }
+        .panel-footer { padding: 1.5rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+        .price { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; font-weight: 700; color: var(--accent); }
+        .price span { font-size: 0.8rem; color: var(--text-muted); }
+        .buy-btn { background: linear-gradient(135deg, var(--primary), #ff6b81); color: white; border: none; padding: 0.7rem 1.5rem; border-radius: 8px; font-family: 'Rajdhani', sans-serif; font-weight: 700; cursor: pointer; transition: all 0.3s; text-transform: uppercase; letter-spacing: 1px; }
+        .buy-btn:hover { transform: scale(1.05); box-shadow: var(--glow-primary); }
+
+        /* Footer */
+        footer { background: var(--dark); border-top: 1px solid var(--border); padding: 3rem 2rem 2rem; margin-top: 5rem; }
+        .footer-content { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; }
+        .footer-brand .logo-text { font-size: 1.2rem; margin-bottom: 1rem; }
+        .footer-brand p { color: var(--text-muted); line-height: 1.6; }
+        .footer-links h4 { font-family: 'Orbitron', sans-serif; font-size: 1rem; margin-bottom: 1rem; color: white; }
+        .footer-links ul { list-style: none; }
+        .footer-links li { margin-bottom: 0.5rem; }
+        .footer-links a { color: var(--text-muted); text-decoration: none; transition: color 0.3s; }
+        .footer-links a:hover { color: var(--primary); }
+        .footer-bottom { max-width: 1400px; margin: 2rem auto 0; padding-top: 2rem; border-top: 1px solid var(--border); text-align: center; color: var(--text-muted); font-size: 0.9rem; }
+
+        /* Toast */
+        .toast { position: fixed; bottom: 2rem; right: 2rem; background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--primary); padding: 1rem 1.5rem; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); display: flex; align-items: center; gap: 1rem; transform: translateX(400px); transition: transform 0.3s; z-index: 9999; }
+        .toast.show { transform: translateX(0); }
+        .toast-icon { width: 35px; height: 35px; background: rgba(46,213,115,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--secondary); }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .hero-stats { gap: 1.5rem; }
+            .nav-links { display: none; }
+            .store-grid { grid-template-columns: 1fr; }
+            .social-bar { flex-direction: column; align-items: center; }
+        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--darker); }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+    <div class="particles" id="particles"></div>
+
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="#" class="logo">
+                <div class="logo-icon"><i class="fas fa-fire"></i></div>
+                <div>
+                    <div class="logo-text">KAVEE</div>
+                    <div class="logo-sub">SENSI STORE</div>
+                </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#upload">Uploader</a></li>
+                <li><a href="#store">SENSI</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero" id="home">
+        <div class="hero-badge">
+            <i class="fas fa-bolt"></i>
+            <span>Free Fire SENSI Store</span>
+        </div>
+        <h1>KAVEE <span>SENSI STORE</span></h1>
+        <p>Upload, share, and download Free Fire sensi files. Connect with us on WhatsApp & YouTube for the latest updates!</p>
+        <div class="hero-stats">
+            <div class="stat">
+                <div class="stat-value" id="statFiles">4800+</div>
+                <div class="stat-label">Files Hosted</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value" id="statUsers">1500+</div>
+                <div class="stat-label">Active Users</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value" id="statPanels">50+</div>
+                <div class="stat-label">Sensi Available</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Links -->
+    <div class="social-bar">
+        <a href="https://whatsapp.com/channel/0029Vb8NxqY6xCSOKTvaa50i" target="_blank" class="social-btn whatsapp">
+            <i class="fab fa-whatsapp" style="color:#25d366;"></i>
+            <span>WhatsApp Channel 1</span>
+        </a>
+        <a href="https://chat.whatsapp.com/GhlWoeDmQLyGbrV3VbrbcM">
+            <i class="fab fa-whatsapp" style="color:#25d366;"></i>
+            <span>WhatsApp Group</span>
+        </a>
+        <a href="https://wa.me/94705310919?text=Hy%20KAVEE%20SENSI" target="_blank" class="social-btn youtube">
+            <i class="fab fa-whatsapp" style="color:#25d366;"></i>
+            <span>owner contact number</span>
+        </a>
+    </div>
+
+
+    <!-- Sensi Store -->
+    <section class="store-section" id="store">
+        <div class="section-header">
+            <h2><i class="fas fa-store" style="color: var(--accent);"></i> Premium Sensi</h2>
+            <p>Get access to exclusive Free Fire Sensi and configurations</p>
+        </div>
+
+        <div class="panel-grid">
+            <div class="panel-card">
+                <div class="panel-header">
+                    <span class="panel-tag hot">HOT</span>
+                    <h3>VIP Elite Sensi</h3>
+                </div>
+                <div class="panel-Head">
+                    <ul class="panel-features">
+                        <li><i class="fas fa-check"></i> Drag Headshot Config🎯</li>
+                        <li><i class="fas fa-check"></i> Aim Lock 🔒 </li>
+                        <li><i class="fas fa-check"></i> No Recoil 100% 🔥</li>
+                        <li><i class="fas fa-check"></i> Speed moment tricks 👺</li>
+                        <li><i class="fas fa-check"></i> Bypass Protection 🛡️</li>
+                    </ul>
+                </div>
+                <div class="panel-footer">
+                    <div class="price">RS 999 <span>/lifetime</span></div>
+                    <button class="buy-btn" onclick="buyPanel('VIP Elite Sensi')">Buy Now</button>
+                </div>
+            </div>
+
+            <div class="panel-card">
+                <div class="panel-header">
+                    <span class="panel-tag">POPULAR</span>
+                    <h3>SENSI BREVENT APP</h3>
+                </div>
+                <div class="panel-body">
+                    <ul class="panel-features">
+                        <li><i class="fas fa-check"></i> 120 FPS Unlock 🔓</li>
+                        <li><i class="fas fa-check"></i> Drag Headshot 🤷</li>
+                        <li><i class="fas fa-check"></i> Scope Auto-Lock 🗿</li>
+                        <li><i class="fas fa-check"></i> No Recoil 👺</li>
+                        <li><i class="fas fa-check"></i> Phone boost 🖤</li>
+                    </ul>
+                </div>
+                <div class="panel-footer">
+                    <div class="price">RS 399 <span>/lifetime</span></div>
+                    <button class="buy-btn" onclick="sensi('Pro all gun sensi')">Buy Now</button>
+                </div>
+            </div>
+
+            <div class="panel-card">
+                <div class="panel-header">
+                    <span class="panel-tag">NEW</span>
+                    <h3>Starter Pack</h3>
+                </div>
+                <div class="panel-body">
+                    <ul class="panel-features">
+                        <li><i class="fas fa-check"></i> Basic Aim Assist🎯</li>
+                        <li><i class="fas fa-check"></i> 50% Recoil🔒 </li>
+                        <li><i class="fas fa-check"></i> Phone boost🔛</li>
+                        <li><i c
