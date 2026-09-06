@@ -1,1 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KAVEE SENSI STORE | Free Fire Sensi Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #ff4757;
+            --secondary: #2ed573;
+            --accent: #ffa502;
+            --dark: #0a0a0f;
+            --darker: #050508;
+            --card: #13131f;
+            --card-hover: #1a1a2e;
+            --border: #2a2a3e;
+            --text: #e0e0e0;
+            --text-muted: #888;
+            --glow-primary: 0 0 20px rgba(255, 71, 87, 0.4);
+            --glow-secondary: 0 0 20px rgba(46, 213, 115, 0.4);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: var(--darker);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* Background */
+        .bg-animation {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+            background:
+                radial-gradient(ellipse at 20% 80%, rgba(255,71,87,0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(46,213,115,0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(255,165,2,0.03) 0%, transparent 70%);
+        }
+        .particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+        .particle { position: absolute; width: 2px; height: 2px; background: var(--primary); border-radius: 50%; animation: float 15s infinite; opacity: 0.3; }
+        @keyframes float { 0%,100%{transform:translateY(0) translateX(0);opacity:0} 10%{opacity:0.3} 90%{opacity:0.3} 100%{transform:translateY(-100vh) translateX(50px);opacity:0} }
+
+        /* Header */
+        header { background: rgba(10,10,15,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; }
+        nav { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .logo-icon { width: 45px; height: 45px; background: linear-gradient(135deg, var(--primary), var(--accent)); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: white; box-shadow: var(--glow-primary); animation: pulse 2s infinite; }
+        @keyframes pulse { 0%,100%{box-shadow:0 0 20px rgba(255,71,87,0.4)} 50%{box-shadow:0 0 40px rgba(255,71,87,0.7)} }
+        .logo-text { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; font-weight: 900; background: linear-gradient(135deg, #fff, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; letter-spacing: 2px; }
+        .logo-sub { font-size: 0.7rem; color: var(--text-muted); letter-spacing: 3px; text-transform: uppercase; }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a { color: var(--text-muted); text-decoration: none; font-weight: 600; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s; position: relative; }
+        .nav-links a:hover { color: var(--primary); }
+        .nav-links a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: var(--primary); transition: width 0.3s; }
+        .nav-links a:hover::after { width: 100%; }
+
+        /* Hero */
+        .hero { padding: 5rem 2rem; text-align: center; max-width: 1400px; margin: 0 auto; }
+        .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,71,87,0.1); border: 1px solid rgba(255,71,87,0.3); padding: 0.5rem 1.2rem; border-radius: 50px; font-size: 0.85rem; color: var(--primary); margin-bottom: 1.5rem; animation: glow 3s infinite; }
+        @keyframes glow { 0%,100%{box-shadow:0 0 5px rgba(255,71,87,0.2)} 50%{box-shadow:0 0 20px rgba(255,71,87,0.4)} }
+        .hero h1 { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; font-weight: 900; margin-bottom: 1rem; line-height: 1.2; }
+        .hero h1 span { background: linear-gradient(135deg, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .hero p { font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin: 0 auto 2rem; line-height: 1.6; }
+        .hero-stats { display: flex; justify-content: center; gap: 3rem; margin-top: 3rem; }
+        .stat { text-align: center; }
+        .stat-value { font-family: 'Orbitron', sans-serif; font-size: 2rem; font-weight: 700; color: var(--primary); }
+        .stat-label { font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; }
+
+        /* Social Links Bar */
+        .social-bar { max-width: 1400px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+        .social-btn { display: inline-flex; align-items: center; gap: 8px; padding: 0.8rem 1.5rem; border-radius: 12px; text-decoration: none; font-weight: 700; font-size: 0.95rem; transition: all 0.3s; border: 1px solid var(--border); color: var(--text); }
+        .social-btn.whatsapp { background: rgba(37,211,102,0.1); border-color: rgba(37,211,102,0.3); }
+        .social-btn.whatsapp:hover { background: rgba(37,211,102,0.2); box-shadow: 0 0 20px rgba(37,211,102,0.3); transform: translateY(-3px); }
+        .social-btn.youtube { background: rgba(255,0,0,0.1); border-color: rgba(255,0,0,0.3); }
+        .social-btn.youtube:hover { background: rgba(255,0,0,0.2); box-shadow: 0 0 20px rgba(255,0,0,0.3); transform: translateY(-3px); }
+        .social-btn i { font-size: 1.2rem; }
+
+        /* File Uploader */
+        .upload-section { max-width: 900px; margin: 3rem auto; padding: 0 2rem; }
+        .section-header { text-align: center; margin-bottom: 2rem; }
+        .section-header h2 { font-family: 'Orbitron', sans-serif; font-size: 2rem; margin-bottom: 0.5rem; }
+        .section-header p { color: var(--text-muted); }
+        .upload-zone { background: var(--card); border: 2px dashed var(--border); border-radius: 20px; padding: 3rem; text-align: center; transition: all 0.3s; cursor: pointer; position: relative; overflow: hidden; }
+        .upload-zone::before { content: ''; position: absolute; top: -2px; left: -2px; right: -2px; bottom: -2px; background: linear-gradient(45deg, var(--primary), var(--accent), var(--secondary), var(--primary)); border-radius: 20px; opacity: 0; z-index: -1; transition: opacity 0.3s; background-size: 400% 400%; animation: gradient 3s ease infinite; }
+        @keyframes gradient { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+        .upload-zone:hover { border-color: transparent; transform: translateY(-5px); }
+        .upload-zone:hover::before { opacity: 1; }
+        .upload-zone.dragover { border-color: var(--primary); background: rgba(255,71,87,0.05); }
+        .upload-icon { font-size: 4rem; color: var(--primary); margin-bottom: 1rem; animation: bounce 2s infinite; }
+        @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+        .upload-zone h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .upload-zone p { color: var(--text-muted); margin-bottom: 1.5rem; }
+        .upload-btn { background: linear-gradient(135deg, var(--primary), var(--accent)); color: white; border: none; padding: 0.9rem 2.5rem; border-radius: 50px; font-family: 'Rajdhani', sans-serif; font-size: 1rem; font-weight: 700; cursor: pointer; transition: all 0.3s; text-transform: uppercase; letter-spacing: 2px; box-shadow: var(--glow-primary); }
+        .upload-btn:hover { transform: scale(1.05); box-shadow: 0 0 40px rgba(255,71,87,0.6); }
+        #fileInput { display: none; }
+
+        /* File List */
+        .file-list { margin-top: 2rem; }
+        .file-item { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1rem 1.5rem; margin-bottom: 0.8rem; display: flex; align-items: center; justify-content: space-between; transition: all 0.3s; animation: slideIn 0.3s ease; }
+        @keyframes slideIn { from{opacity:0;transform:translateX(-20px)} to{opacity:1;transform:translateX(0)} }
+        .file-item:hover { background: var(--card-hover); border-color: var(--primary); transform: translateX(5px); }
+        .file-info { display: flex; align-items: center; gap: 1rem; }
+        .file-icon { width: 45px; height: 45px; background: rgba(255,71,87,0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--primary); font-size: 1.2rem; }
+        .file-details h4 { font-size: 1rem; margin-bottom: 2px; }
+        .file-details span { font-size: 0.8rem; color: var(--text-muted); }
+        .file-actions { display: flex; gap: 0.5rem; }
+        .file-btn { width: 35px; height: 35px; border-radius: 8px; border: 1px solid var(--border); background: transparent; color: var(--text-muted); cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; }
+        .file-btn:hover { background: var(--primary); color: white; border-color: var(--primary); }
+        .progress-bar { width: 100%; height: 4px; background: var(--border); border-radius: 2px; margin-top: 0.5rem; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, var(--primary), var(--accent)); border-radius: 2px; transition: width 0.3s; width: 0%; }
+
+        /* Panels Store */
+        .store-section { max-width: 1400px; margin: 5rem auto; padding: 0 2rem; }
+        .store-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+        .panel-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; transition: all 0.3s; position: relative; }
+        .panel-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--primary), var(--accent)); transform: scaleX(0); transition: transform 0.3s; }
+        .panel-card:hover::before { transform: scaleX(1); }
+        .panel-card:hover { transform: translateY(-10px); border-color: rgba(255,71,87,0.3); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+        .panel-header { padding: 1.5rem; background: linear-gradient(135deg, rgba(255,71,87,0.1), rgba(255,165,2,0.05)); border-bottom: 1px solid var(--border); }
+        .panel-tag { display: inline-block; padding: 0.3rem 0.8rem; background: rgba(46,213,115,0.15); color: var(--secondary); border-radius: 50px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem; }
+        .panel-tag.hot { background: rgba(255,71,87,0.15); color: var(--primary); }
+        .panel-header h3 { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; }
+        .panel-body { padding: 1.5rem; }
+        .panel-features { list-style: none; margin-bottom: 1.5rem; }
+        .panel-features li { padding: 0.4rem 0; color: var(--text-muted); font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem; }
+        .panel-features li i { color: var(--secondary); font-size: 0.8rem; }
+        .panel-footer { padding: 1.5rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+        .price { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; font-weight: 700; color: var(--accent); }
+        .price span { font-size: 0.8rem; color: var(--text-muted); }
+        .buy-btn { background: linear-gradient(135deg, var(--primary), #ff6b81); color: white; border: none; padding: 0.7rem 1.5rem; border-radius: 8px; font-family: 'Rajdhani', sans-serif; font-weight: 700; cursor: pointer; transition: all 0.3s; text-transform: uppercase; letter-spacing: 1px; }
+        .buy-btn:hover { transform: scale(1.05); box-shadow: var(--glow-primary); }
+
+        /* Footer */
+        footer { background: var(--dark); border-top: 1px solid var(--border); padding: 3rem 2rem 2rem; margin-top: 5rem; }
+        .footer-content { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; }
+        .footer-brand .logo-text { font-size: 1.2rem; margin-bottom: 1rem; }
+        .footer-brand p { color: var(--text-muted); line-height: 1.6; }
+        .footer-links h4 { font-family: 'Orbitron', sans-serif; font-size: 1rem; margin-bottom: 1rem; color: white; }
+        .footer-links ul { list-style: none; }
+        .footer-links li { margin-bottom: 0.5rem; }
+        .footer-links a { color: var(--text-muted); text-decoration: none; transition: color 0.3s; }
+        .footer-links a:hover { color: var(--primary); }
+        .footer-bottom { max-width: 1400px; margin: 2rem auto 0; padding-top: 2rem; border-top: 1px solid var(--border); text-align: center; color: var(--text-muted); font-size: 0.9rem; }
+
+        /* Toast */
+        .toast { position: fixed; bottom: 2rem; right: 2rem; background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--primary); padding: 1rem 1.5rem; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); display: flex; align-items: center; gap: 1rem; transform: translateX(400px); transition: transform 0.3s; z-index: 9999; }
+        .toast.show { transform: translateX(0); }
+        .toast-icon { width: 35px; height: 35px; background: rgba(46,213,115,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--secondary); }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .hero-stats { gap: 1.5rem; }
+            .nav-links { display: none; }
+            .store-grid { grid-template-columns: 1fr; }
+            .social-bar { flex-direction: column; align-items: center; }
+        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--darker); }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+    <div class="particles" id="particles"></div>
+
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="#" class="logo">
+                <div class="logo-icon"><i class="fas fa-fire"></i></div>
+                <div>
+                    <div class="logo-text">KAVEE</div>
+                    <div class="logo-sub">SENSI STORE</div>
+                </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#upload">Uploader</a></li>
+                <li><a href="#store">SENSI</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero" id="home">
+        <div class="hero-badge">
+            <i class="fas fa-bolt"></i>
+            <span>Free Fire SENSI Store</span>
+        </div>
+        <h1>KAVEE <span>SENSI STORE</span></h1>
+        <p>Upload, share, and download Free Fire sensi files. Connect with us on WhatsApp & YouTube for the latest updates!</p>
+        <div class="hero-stats">
+            <div class="stat">
+                <div class="stat-value" id="statFiles">4800+</div>
+                <div class="stat-label">Files Hosted</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value" id="statUsers">1500+</div>
+                <div class="stat-label">Active Users</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value" id="statPanels">50+</div>
+                <div class="stat-label">Sensi Available</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Links -->
+    <div class="social-bar">
+        <a href="https://whatsapp.com/channel/0029Vb8NxqY6xCSOKTvaa50i" target="_blank" class="social-btn whatsapp">
+            <i class="fab fa-whatsapp" style="color:#25d366;"></i>
+            <span>WhatsApp Channel 1</span>
+        </a>
+        <a href="https://chat.whatsapp.com/GhlWoeDmQLyGbrV3VbrbcM">
+            <i class="fab fa-whatsapp" style="color:#25d366;"></i>
+            <span>WhatsApp Group</span>
+        </a>
+        <a href="https://wa.me/94705310919?text=Hy%20KAVEE%20SENSI" target="_blank" class="social-btn youtube">
+            <i class="fab fa-whatsapp" style="color:#25d366;"></i>
+            <span>owner contact number</span>
+        </a>
+    </div>
+
+
+    <!-- Sensi Store -->
+    <section class="store-section" id="store">
+        <div class="section-header">
+            <h2><i class="fas fa-store" style="color: var(--accent);"></i> Premium Sensi</h2>
+            <p>Get access to exclusive Free Fire Sensi and configurations</p>
+        </div>
+
+        <div class="panel-grid">
+            <div class="panel-card">
+                <div class="panel-header">
+                    <span class="panel-tag hot">HOT</span>
+                    <h3>VIP Elite Sensi</h3>
+                </div>
+                <div class="panel-Head">
+                    <ul class="panel-features">
+                        <li><i class="fas fa-check"></i> Drag Headshot Config🎯</li>
+                        <li><i class="fas fa-check"></i> Aim Lock 🔒 </li>
+                        <li><i class="fas fa-check"></i> No Recoil 100% 🔥</li>
+                        <li><i class="fas fa-check"></i> Speed moment tricks 👺</li>
+                        <li><i class="fas fa-check"></i> Bypass Protection 🛡️</li>
+                    </ul>
+                </div>
+                <div class="panel-footer">
+                    <div class="price">RS 999 <span>/lifetime</span></div>
+                    <button class="buy-btn" onclick="buyPanel('VIP Elite Sensi')">Buy Now</button>
+                </div>
+            </div>
+
+            <div class="panel-card">
+                <div class="panel-header">
+                    <span class="panel-tag">POPULAR</span>
+                    <h3>SENSI BREVENT APP</h3>
+                </div>
+                <div class="panel-body">
+                    <ul class="panel-features">
+                        <li><i class="fas fa-check"></i> 120 FPS Unlock 🔓</li>
+                        <li><i class="fas fa-check"></i> Drag Headshot 🤷</li>
+                        <li><i class="fas fa-check"></i> Scope Auto-Lock 🗿</li>
+                        <li><i class="fas fa-check"></i> No Recoil 👺</li>
+                        <li><i class="fas fa-check"></i> Phone boost 🖤</li>
+                    </ul>
+                </div>
+                <div class="panel-footer">
+                    <div class="price">RS 399 <span>/lifetime</span></div>
+                    <button class="buy-btn" onclick="sensi('Pro all gun sensi')">Buy Now</button>
+                </div>
+            </div>
+
+            <div class="panel-card">
+                <div class="panel-header">
+                    <span class="panel-tag">NEW</span>
+                    <h3>Starter Pack</h3>
+                </div>
+                <div class="panel-body">
+                    <ul class="panel-features">
+                        <li><i class="fas fa-check"></i> Basic Aim Assist🎯</li>
+                        <li><i class="fas fa-check"></i> 50% Recoil🔒 </li>
+                        <li><i class="fas fa-check"></i> Phone boost🔛</li>
+                        </i> Quick Scope🔎</li>
+                        <li><i class="fas fa-check"></i> 24/7 Support🔥</li>
+                    </ul>
+                </div>
+                <div class="panel-footer">
+                    <div class="price">RS 299 <span>/lifetime</span></div>
+                    <button class="buy-btn" onclick="buysensi('Starter Pack')">Buy Now</button>
+                </div>
+            </div>
+
+            <div class="panel-card">
+                <div class="panel-header">
+                    <span class="panel-tag hot">BEST</span>
+                    <h3>Ultimate God Panel</h3>
+                </div>
+                <div class="panel-body">
+                    <ul class="panel-features">
+                        <li><i class="fas fa-check"></i> All Features Unlocked👺</li>
+                        <li><i class="fas fa-check"></i> VIP Support Channel🗿</li>
+                        <li><i class="fas fa-check"></i> Weekly Updates🔥</li>
+                        <li><i class="fas fa-check"></i> Custom Config Builder🎯</li>
+                        <li><i class="fas fa-check"></i> Private Server Access🔛</li>
+                    </ul>
+                </div>
+                <div class="panel-footer">
+                    <div class="price">RS 2699 <span>/lifetime</span></div>
+                    <button class="buy-btn" onclick="buysensi('Ultimate God sensi')">Buy Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="logo-text" style="margin-bottom: 1rem;"> KAVEE SENSI STORE</div>
+                <p>Your trusted destination for Free Fire sensi and configurations. Upload, share, and dominate the battlefield.</p>
+                <div style="margin-top: 1rem; display: flex; gap: 1rem;">
+                    <a href="https://whatsapp.com/channel/0029Vb8NxqY6xCSOKTvaa50i" target="_blank" style="color: #25d366; font-size: 1.5rem; transition: transform 0.3s;"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://wa.me/94705310919?text=Hy%20KAVEE%20SENSI" target="_blank" style="color: #25d366; font-size: 1.5rem; transition: transform 0.3s;"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://chat.whatsapp.com/GhlWoeDmQLyGbrV3VbrbcM" target="_blank" style="color: #ff0000; font-size: 1.5rem; transition: transform 0.3s;"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#upload">File Uploader</a></li>
+                    <li><a href="#store">Sensi Store</a></li>
+                    <li><a href="https://whatsapp.com/channel/EXAMPLE" target="_blank">WhatsApp</a></li>
+                    <li><a href="https://youtube.com/@EXAMPLE" target="_blank">YouTube</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">How to Use</a></li>
+                    <li><a href="#">Report Issue</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Refund Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 KAVEE SENSI STORE. All rights </i> Quick Scope🔎</li>
+                        <li><i class="fas fa-check"></i> 24/7 Support🔥</li>
+                    </ul>
+                </div>
+                <div class="panel-footer">
+                    <div class="price">RS 299 <span>/lifetime</span></div>
+                    <button class="buy-btn" onclick="buysensi('Starter Pack')">Buy Now</button>
+                </div>
+            </div>
+
+            <div class="panel-card">
+                <div class="panel-header">
+                    <span class="panel-tag hot">BEST</span>
+                    <h3>Ultimate God Panel</h3>
+                </div>
+                <div class="panel-body">
+                    <ul class="panel-features">
+                        <li><i class="fas fa-check"></i> All Features Unlocked👺</li>
+                        <li><i class="fas fa-check"></i> VIP Support Channel🗿</li>
+                        <li><i class="fas fa-check"></i> Weekly Updates🔥</li>
+                        <li><i class="fas fa-check"></i> Custom Config Builder🎯</li>
+                        <li><i class="fas fa-check"></i> Private Server Access🔛</li>
+                    </ul>
+                </div>
+                <div class="panel-footer">
+                    <div class="price">RS 2699 <span>/lifetime</span></div>
+                    <button class="buy-btn" onclick="buysensi('Ultimate God sensi')">Buy Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="logo-text" style="margin-bottom: 1rem;"> KAVEE SENSI STORE</div>
+                <p>Your trusted destination for Free Fire sensi and configurations. Upload, share, and dominate the battlefield.</p>
+                <div style="margin-top: 1rem; display: flex; gap: 1rem;">
+                    <a href="https://whatsapp.com/channel/0029Vb8NxqY6xCSOKTvaa50i" target="_blank" style="color: #25d366; font-size: 1.5rem; transition: transform 0.3s;"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://wa.me/94705310919?text=Hy%20KAVEE%20SENSI" target="_blank" style="color: #25d366; font-size: 1.5rem; transition: transform 0.3s;"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://chat.whatsapp.com/GhlWoeDmQLyGbrV3VbrbcM" target="_blank" style="color: #ff0000; font-size: 1.5rem; transition: transform 0.3s;"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#upload">File Uploader</a></li>
+                    <li><a href="#store">Sensi Store</a></li>
+                    <li><a href="https://whatsapp.com/channel/EXAMPLE" target="_blank">WhatsApp</a></li>
+                    <li><a href="https://youtube.com/@EXAMPLE" target="_blank">YouTube</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">How to Use</a></li>
+                    <li><a href="#">Report Issue</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Refund Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 KAVEE SENSI STORE. All rights reserved. Not affiliated with Garena.</p>
+        </div>
+    </footer>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <div class="toast-icon"><i class="fas fa-check"></i></div>
+        <div>
+            <div style="font-weight: 700;" id="toastTitle">Success</div>
+            <div style="font-size: 0.85rem; color: var(--text-muted);" id="toastMessage">Operation completed</div>
+        </div>
+    </div>
+
+    <script>
+        // Particles
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 30; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 15 + 's';
+            particle.style.animationDuration = (10 + Math.random() * 20) + 's';
+            particlesContainer.appendChild(particle);
+        }
+
+        // Stats Counter
+        function animateValue(id, start, end, duration) {
+            const obj = document.getElementById(id);
+            const range = end - start;
+            const increment = end > start ? 1 : -1;
+            const stepTime = Math.abs(Math.floor(duration / range));
+            let current = start;
+            const timer = setInterval(() => {
+                current += increment * Math.ceil(range / 100);
+                if ((increment > 0 && current >= end) || (increment < 0 && current <= end)) {
+                    current = end;
+                    clearInterval(timer);
+                }
+                obj.textContent = current.toLocaleString() + '+';
+            }, stepTime);
+        }
+        setTimeout(() => {
+            animateValue('statFiles', 0, 1250, 2000);
+            animateValue('statUsers', 0, 3400, 2000);
+            animateValue('statPanels', 0, 48, 2000);
+        }, 500);
+
+        // File Upload
+        const uploadZone = document.getElementById('uploadZone');
+        const fileInput = document.getElementById('fileInput');
+        const fileList = document.getElementById('fileList');
+        let uploadedFiles = [];
+
+        uploadZone.addEventListener('click', () => fileInput.click());
+        uploadZone.addEventListener('dragover', (e) => { e.preventDefault(); uploadZone.classList.add('dragover'); });
+        uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('dragover'));
+        uploadZone.addEventListener('drop', (e) => { e.preventDefault(); uploadZone.classList.remove('dragover'); handleFiles(e.dataTransfer.files); });
+        fileInput.addEventListener('change', (e) => handleFiles(e.target.files));
+
+        function handleFiles(files) {
+            Array.from(files).forEach(file => {
+                if (file.size > 50 * 1024 * 1024) { showToast('Error', 'File too large! Max 50MB allowed.', 'error'); return; }
+                const fileData = { id: Date.now() + Math.random(), name: file.name, size: formatSize(file.size), type: file.name.split('.').pop(), progress: 0 };
+                uploadedFiles.push(fileData);
+                renderFile(fileData);
+                simulateUpload(fileData);
+            });
+        }
+        function formatSize(bytes) { if (bytes === 0) return '0 B'; const k = 1024; const sizes = ['B','KB','MB','GB']; const i = Math.floor(Math.log(bytes) / Math.log(k)); return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i]; }
+        function renderFile(file) {
+            const div = document.createElement('div');
+            div.className = 'file-item';
+            div.id = `file-${file.id}`;
+            div.innerHTML = `
+                <div style="flex: 1;">
+                    <div class="file-info">
+                        <div class="file-icon"><i class="fas fa-file-archive"></i></div>
+                        <div class="file-details">
+                            <h4>${file.name}</h4>
+                            <span>${file.size} • ${file.type.toUpperCase()}</span>
+                        </div>
+                    </div>
+                    <div class="progress-bar"><div class="progress-fill" id="progress-${file.id}"></div></div>
+                </div>
+                <div class="file-actions">
+                    <button class="file-btn" onclick="downloadFile('${file.id}')" title="Download"><i class="fas fa-download"></i></button>
+                    <button class="file-btn" onclick="deleteFile('${file.id}')" title="Delete"><i class="fas fa-trash"></i></button>
+                </div>`;
+            fileList.appendChild(div);
+        }
+        function simulateUpload(file) {
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 15;
+                if (progress >= 100) { progress = 100; clearInterval(interval); showToast('Upload Complete', `${file.name} uploaded successfully!`); }
+                const bar = document.getElementById(`progress-${file.id}`);
+                if (bar) bar.style.width = progress + '%';
+            }, 200);
+        }
+        function deleteFile(id) {
+            const el = document.getElementById(`file-${id}`);
+            if (el) { el.style.animation = 'slideIn 0.3s ease reverse'; setTimeout(() => el.remove(), 300); uploadedFiles = uploadedFiles.filter(f => f.id != id); showToast('Deleted', 'File removed from list'); }
+        }
+        function downloadFile(id) {
+            const file = uploadedFiles.find(f => f.id == id);
+   :                    const blob = new Blob(['// Free Fire Sensi Config
+// KAVEE SENSI STORE
+// File: ' + file.name], { type: 'text/plain' });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a'); a.href = url; a.download = file.name; a.click(); URL.revokeObjectURL(url);
+                }, 1000);
+            }
+        }
+        function buySensi(name) { showToast('Coming Soon', `Redirecting to payment for ${name}...`); }
+        function showToast(title, message, type = 'success') {
+            const toast = document.getElementById('toast');
+            const toastTitle = document.getElementById('toastTitle');
+            const toastMessage = document.getElementById('toastMessage');
+            const toastIcon = toast.querySelector('.toast-icon');
+            toastTitle.textContent = title; toastMessage.textContent = message;
+            if (type === 'error') { toast.style.borderLeftColor = '#ff4757'; toastIcon.style.background = 'rgba(255,71,87,0.1)'; toastIcon.style.color = '#ff4757'; toastIcon.innerHTML = '<i class="fas fa-exclamation-circle"></i>'; }
+            else { toast.style.borderLeftColor = '#2ed573'; toastIcon.style.background = 'rgba(46,213,115,0.1)'; toastIcon.style.color = '#2ed573'; toastIcon.innerHTML = '<i class="fas fa-check"></i>'; }
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) { e.preventDefault(); const target = document.querySelector(this.getAttribute('href')); if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' }); });
+        });
+    </script>
+</body>
+</html>reserved. Not affiliated with Garena.</p>
+        </div>
+    </footer>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <div class="toast-icon"><i class="fas fa-check"></i></div>
+        <div>
+            <div style="font-weight: 700;" id="toastTitle">Success</div>
+            <div style="font-size: 0.85rem; color: var(--text-muted);" id="toastMessage">Operation completed</div>
+        </div>
+    </div>
+
+    <script>
+        // Particles
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 30; i++) {
 
